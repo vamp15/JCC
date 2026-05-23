@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>メンバー紹介 — JCC Japan Creative Community</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --red: #c1121f;
+      --blue: #003049;
+      --white: #f8f9fa;
+      --ink: #101820;
+      --line: rgba(0, 48, 73, .22);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background:
+        linear-gradient(90deg, var(--blue) 0 23%, transparent 23% 77%, var(--red) 77% 100%),
+        var(--white);
+      color: var(--ink);
+      font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", Meiryo, system-ui, sans-serif;
+      display: grid;
+      place-items: center;
+      padding: 40px 0;
+    }
+
+    main {
+      width: min(94vw, 1080px);
+      background: var(--white);
+      border: 1px solid rgba(0,48,73,.18);
+      box-shadow: 0 28px 80px rgba(0,0,0,.28);
+      display: grid;
+      grid-template-columns: 72px 1fr 72px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    main::before,
+    main::after {
+      content: "";
+      position: absolute;
+      inset-block: 0;
+      width: 72px;
+      z-index: 0;
+    }
+    main::before { left: 0; background: var(--blue); }
+    main::after  { right: 0; background: var(--red); }
+
+    .content {
+      grid-column: 2;
+      z-index: 1;
+      padding: clamp(34px, 5vw, 62px) clamp(26px, 7vw, 88px);
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    /* ── ナビ ── */
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border: 3px solid var(--blue);
+      background: var(--white);
+      color: var(--blue);
+      font-size: 1rem;
+      font-weight: 900;
+      text-decoration: none;
+      box-shadow: 4px 4px 0 var(--red);
+      transition: transform .16s, box-shadow .16s, background .16s, color .16s;
+    }
+    .nav-back:hover {
+      background: var(--blue);
+      color: var(--white);
+      transform: translate(2px,2px);
+      box-shadow: 2px 2px 0 var(--red);
+    }
+    .nav-back svg {
+      width: 18px; height: 18px;
+      stroke: currentColor; stroke-width: 2.5;
+      fill: none; stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    /* ── ヘッダー ── */
+    .page-header {
+      border-top: 8px solid var(--red);
+      padding-top: 24px;
+    }
+
+    .page-header h1 {
+      font-size: clamp(1.9rem, 4vw, 3.2rem);
+      font-weight: 900;
+      color: var(--blue);
+      line-height: 1.2;
+    }
+
+    .page-header .sub {
+      margin-top: 8px;
+      font-size: clamp(.95rem, 1.6vw, 1.1rem);
+      font-weight: 700;
+      color: rgba(16,24,32,.6);
+    }
+
+    .stripe {
+      height: 14px;
+      width: min(60vw, 420px);
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      margin-top: 18px;
+    }
+    .stripe i:nth-child(1) { background: var(--blue); }
+    .stripe i:nth-child(2) { background: var(--white); border-block: 1px solid rgba(0,0,0,.12); }
+    .stripe i:nth-child(3) { background: var(--red); }
+
+    /* ── メンバーカード ── */
+    .members {
+      display: grid;
+      gap: 22px;
+    }
+
+    .member {
+      border: 2px solid var(--line);
+      border-left: 8px solid var(--blue);
+      background: #fff;
+      box-shadow: 6px 6px 0 rgba(193,18,31,.14);
+      padding: clamp(18px, 3vw, 28px);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0 clamp(18px, 3vw, 28px);
+      align-items: start;
+      animation: fadeUp .5s ease both;
+    }
+
+    .member:nth-child(1) { animation-delay: .05s; }
+    .member:nth-child(2) { animation-delay: .12s; }
+    .member:nth-child(3) { animation-delay: .19s; }
+    .member:nth-child(4) { animation-delay: .26s; }
+    .member:nth-child(5) { animation-delay: .33s; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .member-avatar {
+      width: clamp(54px, 8vw, 72px);
+      height: clamp(54px, 8vw, 72px);
+      display: grid;
+      place-items: center;
+      border: 3px solid var(--blue);
+      background: var(--white);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    .member-body {}
+
+    .member-name {
+      font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+      font-weight: 900;
+      color: var(--blue);
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+    .member-role {
+      display: inline-block;
+      padding: 2px 10px;
+      background: var(--blue);
+      color: var(--white);
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: .04em;
+      margin-bottom: 14px;
+    }
+    .member-details {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .member-detail {
+      display: grid;
+      grid-template-columns: 6px 1fr;
+      gap: 10px;
+      align-items: start;
+      font-size: clamp(.9rem, 1.4vw, 1rem);
+      font-weight: 700;
+      line-height: 1.65;
+      color: var(--ink);
+    }
+
+    .member-detail::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 0;
+      background: var(--red);
+      margin-top: .55em;
+    }
+
+    .member-motto {
+      margin-top: 10px;
+      padding: 10px 14px;
+      border-left: 4px solid var(--red);
+      background: rgba(193,18,31,.05);
+      font-size: clamp(.92rem, 1.4vw, 1rem);
+      font-weight: 700;
+      color: var(--red);
+      font-style: italic;
+    }
+
+    .preparing {
+      padding: 18px 0 4px;
+      font-size: clamp(1rem, 1.6vw, 1.1rem);
+      font-weight: 700;
+      color: rgba(16,24,32,.45);
+      font-style: italic;
+    }
+
+    /* ── フッターナビ ── */
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      padding-bottom: 8px;
+    }
+
+    /* ── レスポンシブ ── */
+    @media (max-width: 680px) {
+      body {
+        background: var(--white);
+        place-items: stretch;
+        padding: 0;
+      }
+      main {
+        width: 100%;
+        grid-template-columns: 22px 1fr 22px;
+        border: 0;
+        box-shadow: none;
+      }
+      main::before, main::after { width: 22px; }
+      .content { padding: 40px 18px; }
+      .member {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .member-avatar { width: 56px; height: 56px; }
+    }
+  </style>
+</head>
+<body>
+  <main aria-label="JCCメンバー紹介">
+    <div class="content">
+
+      <!-- ナビ -->
+      <nav class="nav" aria-label="サイトナビゲーション">
+        <a class="nav-back" href="index.html">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+          トップへ戻る
+        </a>
+      </nav>
+
+      <!-- ヘッダー -->
+      <header class="page-header">
+        <h1>メンバー紹介</h1>
+        <p class="sub">2026年5月24日時点 — 5名のメンバー</p>
+        <div class="stripe" aria-hidden="true"><i></i><i></i><i></i></div>
+      </header>
+
+      <!-- メンバー一覧 -->
+      <section class="members" aria-label="メンバー一覧">
+
+        <!-- 1. 愛の詠唱者 -->
+        <article class="member">
+          <div class="member-avatar" aria-hidden="true">🩷</div>
+          <div class="member-body">
+            <div class="member-role">JCC代表</div>
+            <h2 class="member-name">愛の詠唱者</h2>
+            <div class="member-details">
+              <div class="member-detail">ASDとADHDの併発で、幼少期から引きこもり。誰にも理解されない孤独な人生を送ってきた。</div>
+              <div class="member-detail">誰もが幸せで傷つかない社会を望んでいる。</div>
+              <div class="member-detail">趣味: ゲーム</div>
+            </div>
+            <p class="member-motto">「愛は救済」</p>
+          </div>
+        </article>
+
+        <!-- 2. アキレス犬 -->
+        <article class="member">
+          <div class="member-avatar" aria-hidden="true">🏴</div>
+          <div class="member-body">
+            <div class="member-role">メンバー</div>
+            <h2 class="member-name">ㄗ☨ㇾｽ尤（アキレス犬）</h2>
+            <div class="member-details">
+              <div class="member-detail">ASD・ADHD・鬱病持ち。アナキスト兼共産主義者。</div>
+              <div class="member-detail">現在は大学生であり、しがないただの底辺労働者。</div>
+              <div class="member-detail">趣味: 東方、音楽、思想のお勉強</div>
+            </div>
+            <p class="member-motto">「権力は絶対に腐敗する」</p>
+          </div>
+        </article>
+
+        <!-- 3. アイス -->
+        <article class="member">
+          <div class="member-avatar" aria-hidden="true">🟥</div>
+          <div class="member-body">
+            <div class="member-role">メンバー</div>
+            <h2 class="member-name">アイス</h2>
+            <div class="member-details">
+              <div class="member-detail">思想: パターナリズム</div>
+              <div class="member-detail">現在は大学生で、獣医療に携わっている。</div>
+              <div class="member-detail">趣味: ヴァイオリン、音楽鑑賞、ゲーム</div>
+            </div>
+            <p class="member-motto">「人は神ではない。誤りをするというところに人間味がある」</p>
+          </div>
+        </article>
+
+        <!-- 4. えむを推す人 -->
+        <article class="member">
+          <div class="member-avatar" aria-hidden="true">🛵</div>
+          <div class="member-body">
+            <div class="member-role">メンバー</div>
+            <h2 class="member-name">えむを推す人</h2>
+            <p class="preparing">準備中</p>
+          </div>
+        </article>
+
+        <!-- 5. ココアライオン -->
+        <article class="member">
+          <div class="member-avatar" aria-hidden="true">☕️</div>
+          <div class="member-body">
+            <div class="member-role">メンバー</div>
+            <h2 class="member-name">ココアライオン</h2>
+            <p class="preparing">準備中</p>
+          </div>
+        </article>
+
+      </section>
+
+      <!-- フッターナビ -->
+      <nav class="footer-nav" aria-label="フッターナビゲーション">
+        <a class="nav-back" href="index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          トップへ戻る
+        </a>
+      </nav>
+
+    </div>
+  </main>
+</body>
+</html>
