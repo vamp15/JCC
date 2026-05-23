@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>認知バイアスとは？ | JCC</title>
+  <style>
+    :root {
+      --red: #c92335;
+      --red-dark: #991b29;
+      --blue: #173b63;
+      --blue-soft: #e8f0f8;
+      --white: #ffffff;
+      --ink: #1e2a36;
+      --muted: #647487;
+      --line: #d7e0ea;
+      --paper: #f7f9fc;
+      --shadow: 0 18px 48px rgba(23, 59, 99, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Yu Gothic", "YuGothic", "Hiragino Kaku Gothic ProN", Meiryo, system-ui, sans-serif;
+      line-height: 1.78;
+      background:
+        linear-gradient(180deg, rgba(23, 59, 99, 0.08) 0, transparent 360px),
+        var(--paper);
+    }
+
+    img,
+    svg {
+      display: block;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .article-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: clamp(28px, 5vw, 64px);
+      align-items: center;
+      min-height: 72vh;
+      padding: clamp(42px, 7vw, 86px) 0 42px;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      color: var(--blue);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .kicker::before {
+      content: "";
+      width: 30px;
+      height: 4px;
+      background: var(--red);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      color: var(--blue);
+      font-size: clamp(2.35rem, 5vw, 4.7rem);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin-top: 24px;
+      max-width: 38rem;
+      color: #34475b;
+      font-size: clamp(1.05rem, 2vw, 1.22rem);
+      font-weight: 600;
+    }
+
+    .hero-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 28px;
+      padding: 10px 14px;
+      color: var(--white);
+      background: var(--blue);
+      border-left: 6px solid var(--red);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .hero-graphic {
+      position: relative;
+      min-height: 420px;
+      padding: clamp(20px, 4vw, 34px);
+      color: var(--blue);
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-graphic::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 12px;
+      background: linear-gradient(90deg, var(--blue) 0 48%, var(--white) 48% 52%, var(--red) 52% 100%);
+    }
+
+    .decision-map {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding-top: 24px;
+    }
+
+    .map-row {
+      display: grid;
+      grid-template-columns: 86px 1fr;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .map-icon {
+      display: grid;
+      place-items: center;
+      width: 86px;
+      aspect-ratio: 1;
+      background: var(--blue-soft);
+      border: 3px solid var(--blue);
+      border-radius: 8px;
+    }
+
+    .map-icon svg {
+      width: 48px;
+      height: 48px;
+      color: var(--blue);
+    }
+
+    .map-copy {
+      padding: 15px 18px;
+      background: #fdfefe;
+      border: 1px solid var(--line);
+      border-left: 7px solid var(--red);
+      border-radius: 8px;
+    }
+
+    .map-copy strong {
+      display: block;
+      color: var(--blue);
+      font-size: 1.05rem;
+      line-height: 1.45;
+    }
+
+    .map-copy span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .arrow {
+      display: grid;
+      place-items: center;
+      height: 24px;
+      color: var(--red);
+    }
+
+    .arrow svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    main {
+      padding-bottom: 56px;
+    }
+
+    .article-block {
+      margin: 0;
+      padding: clamp(42px, 6vw, 70px) 0;
+      background: transparent;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-title {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .section-title .pictogram {
+      flex: 0 0 auto;
+    }
+
+    .section-title h2 {
+      color: var(--blue);
+      font-size: clamp(1.55rem, 3vw, 2.35rem);
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .body-text {
+      max-width: 760px;
+      color: #33465a;
+      font-size: 1.02rem;
+    }
+
+    .body-text + .body-text {
+      margin-top: 14px;
+    }
+
+    .callout {
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      gap: 16px;
+      align-items: center;
+      margin-top: 24px;
+      padding: 18px;
+      color: var(--blue);
+      background: var(--blue-soft);
+      border-left: 8px solid var(--red);
+      border-radius: 8px;
+      font-weight: 700;
+    }
+
+    .pictogram {
+      display: grid;
+      place-items: center;
+      width: 58px;
+      aspect-ratio: 1;
+      color: var(--white);
+      background: var(--blue);
+      border-radius: 8px;
+    }
+
+    .pictogram.red {
+      background: var(--red);
+    }
+
+    .pictogram.white {
+      color: var(--blue);
+      background: var(--white);
+      border: 2px solid var(--blue);
+    }
+
+    .pictogram svg {
+      width: 34px;
+      height: 34px;
+    }
+
+    .bias-grid,
+    .scene-grid,
+    .check-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .bias-card,
+    .scene-card,
+    .check-card {
+      padding: 22px;
+      background: #fbfdff;
+      border: 1px solid var(--line);
+      border-top: 8px solid var(--blue);
+      border-radius: 8px;
+      min-height: 100%;
+    }
+
+    .bias-card:nth-child(2),
+    .scene-card:nth-child(2),
+    .check-card:nth-child(2) {
+      border-top-color: var(--red);
+    }
+
+    .bias-card:nth-child(3),
+    .scene-card:nth-child(3),
+    .check-card:nth-child(3) {
+      border-top-color: #5279a5;
+    }
+
+    .card-head {
+      display: flex;
+      gap: 13px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .card-head h3 {
+      color: var(--blue);
+      font-size: 1.18rem;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    .card-copy {
+      color: #405266;
+      font-size: 0.97rem;
+    }
+
+    .example-line {
+      margin-top: 14px;
+      padding-top: 12px;
+      color: var(--red-dark);
+      border-top: 1px solid var(--line);
+      font-size: 0.92rem;
+      font-weight: 700;
+      line-height: 1.6;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr minmax(280px, 0.78fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 16px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .timeline-number {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      aspect-ratio: 1;
+      color: var(--white);
+      background: var(--red);
+      border-radius: 8px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .timeline-item strong {
+      display: block;
+      color: var(--blue);
+      line-height: 1.45;
+    }
+
+    .timeline-item span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .scene-card .pictogram,
+    .check-card .pictogram {
+      margin-bottom: 14px;
+    }
+
+    .check-card {
+      background: var(--blue);
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+
+    .check-card:nth-child(2) {
+      background: var(--red);
+    }
+
+    .check-card:nth-child(3) {
+      background: #ffffff;
+      color: var(--blue);
+      border-color: var(--line);
+    }
+
+    .check-card h3 {
+      color: inherit;
+      font-size: 1.08rem;
+      line-height: 1.35;
+    }
+
+    .check-card p {
+      margin-top: 9px;
+      color: inherit;
+      font-size: 0.94rem;
+      opacity: 0.9;
+    }
+
+    .footer {
+      margin-top: 42px;
+      padding: 34px 0 48px;
+      border-top: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .footer img {
+      width: min(220px, 52vw);
+      height: auto;
+      margin: 0 auto;
+    }
+
+    .footer small {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    @media (max-width: 880px) {
+      .article-hero,
+      .split {
+        grid-template-columns: 1fr;
+      }
+
+      .article-hero {
+        min-height: 0;
+      }
+
+      .hero-graphic {
+        min-height: 0;
+      }
+
+      .bias-grid,
+      .scene-grid,
+      .check-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .page {
+        width: min(100% - 24px, 1120px);
+      }
+
+      .article-hero {
+        padding-top: 34px;
+      }
+
+      .map-row,
+      .callout {
+        grid-template-columns: 1fr;
+      }
+
+      .map-icon {
+        width: 70px;
+      }
+
+      .section-title {
+        align-items: flex-start;
+      }
+
+      .pictogram {
+        width: 50px;
+      }
+
+      .article-block {
+        padding: 36px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <article class="page">
+    <header class="article-hero">
+      <div>
+        <p class="kicker">心理と判断の基礎知識</p>
+        <h1>認知バイアスとは？</h1>
+        <p class="lead">
+          人間が情報を処理・判断するとき、無意識のうちに生じる系統的な思考の歪み・偏りのことです。
+        </p>
+        <p class="hero-note">
+          客観的に見ているつもりでも、脳は近道で結論へ進もうとします。
+        </p>
+      </div>
+
+      <div class="hero-graphic" aria-label="情報処理から判断までの流れ">
+        <div class="decision-map">
+          <div class="map-row">
+            <div class="map-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none">
+                <path d="M8 13h32M8 24h22M8 35h28" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                <path d="M35 22l5 5 5-9" stroke="#c92335" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="map-copy">
+              <strong>情報を受け取る</strong>
+              <span>ニュース、経験、人の意見、数字などが判断材料になる。</span>
+            </div>
+          </div>
+
+          <div class="arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 4v14m0 0l-6-6m6 6l6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <div class="map-row">
+            <div class="map-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none">
+                <path d="M18 39c-5 0-9-4-9-9 0-3 2-6 5-8-1-6 4-11 10-11 4 0 7 2 9 5 5 0 9 4 9 9 0 5-4 9-9 9h-2" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M24 20v9l7 4" stroke="#c92335" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="map-copy">
+              <strong>脳が近道を使う</strong>
+              <span>ヒューリスティックにより、速く楽に判断しようとする。</span>
+            </div>
+          </div>
+
+          <div class="arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 4v14m0 0l-6-6m6 6l6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <div class="map-row">
+            <div class="map-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none">
+                <path d="M10 38h28" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                <path d="M14 34l10-20 10 20" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M19 25h10" stroke="#c92335" stroke-width="4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="map-copy">
+              <strong>判断が偏る</strong>
+              <span>一見自然な結論でも、客観性を欠くことがある。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="article-block">
+        <div class="section-title">
+          <div class="pictogram red" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none">
+              <path d="M10 24c0-8 6-14 14-14s14 6 14 14-6 14-14 14-14-6-14-14Z" stroke="currentColor" stroke-width="4"/>
+              <path d="M24 16v10l7 4" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h2>脳の「ショートカット」が偏りを生む</h2>
+        </div>
+        <p class="body-text">
+          認知バイアスは、脳が効率的に判断するための「ショートカット（ヒューリスティック）」が原因で起こります。大量の情報をすべて丁寧に検討するのは難しいため、脳は経験や印象を使ってすばやく答えを出そうとします。
+        </p>
+        <p class="body-text">
+          その仕組み自体は便利ですが、状況によっては客観性を欠いた誤った結論を導きやすくします。
+        </p>
+        <div class="callout">
+          <div class="pictogram white" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none">
+              <path d="M24 7v34M7 24h34" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+              <path d="M14 14l20 20M34 14L14 34" stroke="#c92335" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p>認知バイアスは「性格の弱さ」ではなく、人間の認知に備わった自然な傾向です。</p>
+        </div>
+      </section>
+
+      <section class="article-block">
+        <div class="section-title">
+          <div class="pictogram" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none">
+              <path d="M9 13h30v22H9z" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+              <path d="M15 20h12M15 28h18" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h2>代表的な認知バイアス</h2>
+        </div>
+        <div class="bias-grid">
+          <section class="bias-card">
+            <div class="card-head">
+              <div class="pictogram" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none">
+                  <path d="M12 24l8 8 16-18" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10 38h28" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <h3>確証バイアス</h3>
+            </div>
+            <p class="card-copy">自分の信念に合う情報ばかり集め、反証となる情報を無視しやすくなる偏りです。</p>
+            <p class="example-line">例：賛成意見だけを読み、反対意見を「例外」と考える。</p>
+          </section>
+
+          <section class="bias-card">
+            <div class="card-head">
+              <div class="pictogram red" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none">
+                  <path d="M24 8v32" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                  <path d="M12 16h24M14 16l6 10M34 16l-6 10" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M15 30h10M23 30h10" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <h3>アンカリング効果</h3>
+            </div>
+            <p class="card-copy">最初に与えられた情報に過度に引きずられ、その後の判断が固定されやすくなる現象です。</p>
+            <p class="example-line">例：最初に見た価格が基準になり、高い・安いの感覚が変わる。</p>
+          </section>
+
+          <section class="bias-card">
+            <div class="card-head">
+              <div class="pictogram white" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none">
+                  <path d="M15 36c-3-3-5-7-5-12 0-8 6-14 14-14s14 6 14 14c0 5-2 9-5 12" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                  <path d="M18 39h12M20 30h8" stroke="#c92335" stroke-width="4" stroke-linecap="round"/>
+                  <path d="M24 16v8" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <h3>利用可能性バイアス</h3>
+            </div>
+            <p class="card-copy">記憶に残りやすい事例や思い出しやすい出来事を、実際以上に多い・重要だと見積もる偏りです。</p>
+            <p class="example-line">例：印象的なニュースを見て、発生頻度を過大評価する。</p>
+          </section>
+        </div>
+      </section>
+
+      <section class="article-block split">
+        <div>
+          <div class="section-title">
+            <div class="pictogram red" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none">
+                <path d="M8 34c8-18 24-18 32 0" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                <path d="M16 28c2-7 14-7 16 0" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                <path d="M24 14v8" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h2>なぜなくならないのか</h2>
+          </div>
+          <p class="body-text">
+            これらの偏りは、進化的には生存に有利だった仕組みです。危険をすばやく察知し、限られた情報でも即座に行動することは、過去の環境では大きな強みでした。
+          </p>
+          <p class="body-text">
+            しかし現代では、情報量が多く、判断の結果が長期的に影響する場面が増えています。そのため、昔は役に立った近道が、今は大きな誤りにつながることがあります。
+          </p>
+        </div>
+        <div class="timeline" aria-label="認知バイアスが働く流れ">
+          <div class="timeline-item">
+            <div class="timeline-number">1</div>
+            <p><strong>速く判断する</strong><span>時間や情報が足りないとき、脳は経験則を使う。</span></p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-number">2</div>
+            <p><strong>印象が強まる</strong><span>目立つ情報や最初の情報が、判断の中心になる。</span></p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-number">3</div>
+            <p><strong>結論が偏る</strong><span>検討したつもりでも、別の見方が抜け落ちる。</span></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="article-block">
+        <div class="section-title">
+          <div class="pictogram" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none">
+              <path d="M10 36h28M14 30V18M24 30V12M34 30V22" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+              <path d="M9 39h30" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h2>現代で起こりやすい誤り</h2>
+        </div>
+        <div class="scene-grid">
+          <section class="scene-card">
+            <div class="pictogram" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none">
+                <path d="M10 34l10-10 7 6 11-16" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10 38h28" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>投資</h3>
+            <p class="card-copy">都合のよい予測だけを信じたり、最初に見た価格に引きずられたりして、冷静な判断を失いやすくなります。</p>
+          </section>
+          <section class="scene-card">
+            <div class="pictogram red" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none">
+                <path d="M17 23a7 7 0 1 0 0-14 7 7 0 0 0 0 14Zm14 0a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z" stroke="currentColor" stroke-width="4"/>
+                <path d="M8 39c2-7 8-10 15-10s13 3 17 10" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>人間関係</h3>
+            <p class="card-copy">相手の一度の発言や過去の印象だけで、人格全体を決めつけてしまうことがあります。</p>
+          </section>
+          <section class="scene-card">
+            <div class="pictogram white" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none">
+                <path d="M21 9h6v12h12v6H27v12h-6V27H9v-6h12V9Z" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>医療</h3>
+            <p class="card-copy">記憶に残る症例や体験談を過大評価し、統計的なリスクや専門的な判断を軽視する場合があります。</p>
+          </section>
+        </div>
+      </section>
+
+      <section class="article-block">
+        <div class="section-title">
+          <div class="pictogram red" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none">
+              <path d="M10 25l8 8 20-20" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M10 39h28" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h2>デバイアシングで認知を整える</h2>
+        </div>
+        <p class="body-text">
+          認知バイアスは完全になくすものではなく、自覚して扱うものです。判断前に立ち止まり、チェックリストや第三者の意見を活用することで、より正確な認知に近づけます。
+        </p>
+        <div class="check-grid" style="margin-top: 22px;">
+          <section class="check-card">
+            <div class="pictogram white" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none">
+                <path d="M13 14h22M13 24h22M13 34h14" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>チェックリストを使う</h3>
+            <p>反対証拠、前提、数字の根拠をひとつずつ確認する。</p>
+          </section>
+          <section class="check-card">
+            <div class="pictogram white" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none">
+                <path d="M16 16h16M12 24h24M18 32h12" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                <path d="M24 8v6M24 34v6" stroke="#c92335" stroke-width="4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>別の見方を探す</h3>
+            <p>自分と反対の意見や、別の解釈をあえて検討する。</p>
+          </section>
+          <section class="check-card">
+            <div class="pictogram red" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none">
+                <path d="M14 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm20 0a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" stroke="currentColor" stroke-width="4"/>
+                <path d="M7 38c2-8 8-13 17-13s15 5 17 13" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>第三者の意見を聞く</h3>
+            <p>自分では見落としやすい前提や偏りを外側から確認する。</p>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <img src="assets/jcc-logo.png" alt="JCC Japan Creative Community ロゴ">
+      <small>Japan Creative Community</small>
+    </footer>
+  </article>
+<a href="../index.html" style="position:fixed;bottom:28px;right:28px;display:inline-flex;align-items:center;gap:10px;padding:13px 22px;background:#003049;color:#f8f9fa;font-family:system-ui,sans-serif;font-size:0.97rem;font-weight:800;text-decoration:none;border:3px solid #003049;box-shadow:5px 5px 0 #c1121f;z-index:9999;transition:transform .15s ease,box-shadow .15s ease,background .15s ease;" onmouseover="this.style.background='#c1121f';this.style.boxShadow='5px 5px 0 #003049'" onmouseout="this.style.background='#003049';this.style.boxShadow='5px 5px 0 #c1121f'">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 5-7 7 7 7"/></svg>
+  トップに戻る
+</a>
+</body>
+</html>

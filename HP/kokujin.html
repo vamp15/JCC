@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>黒人への偏見と差別</title>
+  <style>
+    :root {
+      --red: #c72535;
+      --red-dark: #9c1725;
+      --blue: #173b66;
+      --blue-soft: #eaf1f8;
+      --white: #ffffff;
+      --ink: #1d2530;
+      --muted: #5d6876;
+      --line: rgba(23, 59, 102, 0.14);
+      --shadow: 0 24px 70px rgba(23, 59, 102, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", Meiryo, system-ui, sans-serif;
+      line-height: 1.9;
+      background:
+        linear-gradient(135deg, rgba(199, 37, 53, 0.08) 0 18%, transparent 18% 100%),
+        linear-gradient(315deg, rgba(23, 59, 102, 0.09) 0 16%, transparent 16% 100%),
+        #f8fafc;
+    }
+
+    .page {
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 54vh;
+      padding: 72px 22px 58px;
+      color: var(--white);
+      background:
+        linear-gradient(115deg, rgba(23, 59, 102, 0.96), rgba(23, 59, 102, 0.84)),
+        repeating-linear-gradient(135deg, rgba(255,255,255,0.12) 0 1px, transparent 1px 18px);
+      isolation: isolate;
+    }
+
+    .hero::before,
+    .hero::after {
+      position: absolute;
+      content: "";
+      inset: auto;
+      z-index: -1;
+      width: 42vw;
+      min-width: 260px;
+      height: 160px;
+      background: var(--red);
+      transform: rotate(-8deg);
+      opacity: 0.92;
+    }
+
+    .hero::before {
+      top: -58px;
+      left: -90px;
+    }
+
+    .hero::after {
+      right: -100px;
+      bottom: -62px;
+      transform: rotate(-10deg);
+    }
+
+    .hero-inner {
+      width: min(1040px, 100%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      color: rgba(255, 255, 255, 0.84);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .eyebrow::before {
+      display: block;
+      width: 42px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--red);
+      content: "";
+    }
+
+    h1 {
+      max-width: 850px;
+      margin: 0;
+      font-size: clamp(2.1rem, 7vw, 5.4rem);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .hero-lead {
+      max-width: 780px;
+      margin: 28px 0 0;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: clamp(1rem, 2vw, 1.24rem);
+      font-weight: 600;
+    }
+
+    main {
+      position: relative;
+      width: min(1080px, calc(100% - 32px));
+      margin: -46px auto 0;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .summary-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 96px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+      box-shadow: 0 14px 36px rgba(23, 59, 102, 0.08);
+    }
+
+    .summary-mark {
+      display: grid;
+      flex: 0 0 42px;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      color: var(--white);
+      font-weight: 900;
+      background: var(--red);
+    }
+
+    .summary-item:nth-child(2) .summary-mark {
+      background: var(--blue);
+    }
+
+    .summary-item:nth-child(3) .summary-mark {
+      color: var(--blue);
+      border: 3px solid var(--red);
+      background: var(--white);
+    }
+
+    .summary-item p {
+      margin: 0;
+      color: var(--blue);
+      font-size: 0.98rem;
+      font-weight: 800;
+      line-height: 1.55;
+    }
+
+    .article {
+      padding: 34px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: var(--shadow);
+    }
+
+    .section {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section:first-child {
+      padding-top: 4px;
+    }
+
+    .section:last-child {
+      border-bottom: 0;
+      padding-bottom: 6px;
+    }
+
+    .pictogram {
+      position: sticky;
+      top: 20px;
+      display: grid;
+      place-items: center;
+      width: 76px;
+      height: 76px;
+      border: 4px solid var(--white);
+      border-radius: 50%;
+      color: var(--white);
+      background: var(--blue);
+      box-shadow: 0 16px 34px rgba(23, 59, 102, 0.18);
+    }
+
+    .section:nth-child(even) .pictogram {
+      background: var(--red);
+    }
+
+    .pictogram svg {
+      width: 42px;
+      height: 42px;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .content h2 {
+      margin: 0 0 12px;
+      color: var(--blue);
+      font-size: clamp(1.24rem, 2.8vw, 1.72rem);
+      line-height: 1.45;
+      letter-spacing: 0;
+    }
+
+    .content p {
+      margin: 0;
+      font-size: 1.04rem;
+    }
+
+    .content p + p {
+      margin-top: 14px;
+    }
+
+    .callout {
+      margin: 16px 0 0;
+      padding: 16px 18px;
+      border-left: 6px solid var(--red);
+      border-radius: 0 8px 8px 0;
+      color: var(--blue);
+      font-weight: 800;
+      background: var(--blue-soft);
+    }
+
+    .closing {
+      margin-top: 28px;
+      padding: 26px;
+      border-radius: 8px;
+      color: var(--white);
+      background:
+        linear-gradient(90deg, rgba(199, 37, 53, 0.96), rgba(23, 59, 102, 0.96));
+    }
+
+    .closing h2 {
+      margin: 0 0 10px;
+      font-size: clamp(1.32rem, 3vw, 2rem);
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    .closing p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.94);
+      font-weight: 700;
+    }
+
+    footer {
+      width: min(1080px, calc(100% - 32px));
+      margin: 36px auto 0;
+      padding: 34px 0 46px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: min(220px, 46vw);
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+      box-shadow: 0 12px 34px rgba(23, 59, 102, 0.1);
+    }
+
+    .footer-logo img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    @media (max-width: 780px) {
+      .hero {
+        min-height: 48vh;
+        padding: 58px 18px 64px;
+      }
+
+      main {
+        width: min(100% - 24px, 620px);
+      }
+
+      .summary {
+        grid-template-columns: 1fr;
+      }
+
+      .article {
+        padding: 22px;
+      }
+
+      .section {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 24px 0;
+      }
+
+      .pictogram {
+        position: static;
+        width: 62px;
+        height: 62px;
+      }
+
+      .pictogram svg {
+        width: 34px;
+        height: 34px;
+      }
+
+      .content p {
+        font-size: 1rem;
+      }
+
+      .closing {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div class="hero-inner">
+        <p class="eyebrow">差別を正当化しないための視点</p>
+        <h1>黒人への偏見と差別</h1>
+        <p class="hero-lead">
+          「生まれつき知能が低い」という決めつけは、科学的根拠に乏しく、歴史的にも偏見や差別を正当化するために使われてきた考え方です。
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <section class="summary" aria-label="記事の要点">
+        <div class="summary-item">
+          <span class="summary-mark">1</span>
+          <p>知能は環境や機会に大きく左右される</p>
+        </div>
+        <div class="summary-item">
+          <span class="summary-mark">2</span>
+          <p>歴史的な不平等が教育や発展に影響した</p>
+        </div>
+        <div class="summary-item">
+          <span class="summary-mark">3</span>
+          <p>人種で能力を決めつける見方は支持されない</p>
+        </div>
+      </section>
+
+      <article class="article">
+        <section class="section">
+          <div class="pictogram" aria-hidden="true">
+            <svg viewBox="0 0 48 48">
+              <path d="M18 16c0-5 4-8 8-8s8 3 8 8c0 4-2 6-5 8v5H23v-5c-3-2-5-4-5-8Z"/>
+              <path d="M22 38h8"/>
+              <path d="M12 12 36 36"/>
+              <path d="M36 12 12 36"/>
+            </svg>
+          </div>
+          <div class="content">
+            <h2>「生まれつき低い」という主張は根拠に乏しい</h2>
+            <p>
+              黒人は生まれつき知能が低いとする主張は、科学的根拠に乏しく、歴史的にも偏見や差別を正当化するために用いられてきた考え方です。
+            </p>
+            <div class="callout">
+              問題は人種ではなく、根拠のない決めつけが人の可能性を狭めることです。
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="pictogram" aria-hidden="true">
+            <svg viewBox="0 0 48 48">
+              <path d="M10 37c7-8 21-8 28 0"/>
+              <path d="M16 19a8 8 0 1 0 16 0 8 8 0 0 0-16 0Z"/>
+              <path d="M9 13h8"/>
+              <path d="M31 13h8"/>
+              <path d="M24 4v7"/>
+            </svg>
+          </div>
+          <div class="content">
+            <h2>知能は単一で固定された性質ではない</h2>
+            <p>
+              まず重要なのは、「知能」は単一の固定された性質ではなく、教育環境、栄養状態、社会経済的条件、文化的背景など、複数の要因によって大きく影響を受けるという点です。
+            </p>
+            <p>
+              実際、心理学や行動遺伝学の研究では、同じ集団内でも環境の違いによって認知能力に大きな差が生まれることが確認されています。
+            </p>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="pictogram" aria-hidden="true">
+            <svg viewBox="0 0 48 48">
+              <path d="M8 38h32"/>
+              <path d="M13 38V18l11-8 11 8v20"/>
+              <path d="M18 38V25h12v13"/>
+              <path d="M10 18h28"/>
+            </svg>
+          </div>
+          <div class="content">
+            <h2>植民地支配は教育とインフラを制限した</h2>
+            <p>
+              歴史的に見ると、アフリカを含む多くの地域は植民地支配の下で、教育やインフラ整備が意図的に制限されてきました。
+            </p>
+            <p>
+              旧宗主国は資源の搾取を優先し、現地住民に高度な教育や自治能力を育てる政策をほとんど行いませんでした。その結果、独立時には識字率の低さや専門人材の不足といった構造的な問題を抱えたまま国家運営を始めざるを得なかったのです。
+            </p>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="pictogram" aria-hidden="true">
+            <svg viewBox="0 0 48 48">
+              <path d="M24 6v36"/>
+              <path d="M10 17h28"/>
+              <path d="M14 17 8 30h12l-6-13Z"/>
+              <path d="M34 17 28 30h12l-6-13Z"/>
+              <path d="M17 42h14"/>
+            </svg>
+          </div>
+          <div class="content">
+            <h2>発展の遅れは能力ではなく構造の問題</h2>
+            <p>
+              さらに、独立後も冷戦構造や国際経済の不均衡、不安定な政治体制などが重なり、発展の遅れが固定化されるケースが多く見られました。
+            </p>
+            <p>
+              これは単に「能力」の問題ではなく、歴史的・制度的な条件が大きく影響しています。
+            </p>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="pictogram" aria-hidden="true">
+            <svg viewBox="0 0 48 48">
+              <path d="M8 32c5-8 11-12 16-12s11 4 16 12"/>
+              <path d="M15 32c3-4 6-6 9-6s6 2 9 6"/>
+              <path d="M24 10v6"/>
+              <path d="M13 14l4 4"/>
+              <path d="M35 14l-4 4"/>
+              <path d="M19 40h10"/>
+            </svg>
+          </div>
+          <div class="content">
+            <h2>教育機会と生活環境の改善で能力は伸びる</h2>
+            <p>
+              現代の研究では、人種間で本質的かつ決定的な知能差が存在するという明確な証拠は確認されていません。
+            </p>
+            <p>
+              むしろ、教育機会や生活環境の改善によって認知能力の平均値は大きく向上することが知られており、いわゆる「差」とされてきたものの多くは後天的な要因で説明可能です。
+            </p>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="pictogram" aria-hidden="true">
+            <svg viewBox="0 0 48 48">
+              <path d="M24 40s-14-8-14-20a8 8 0 0 1 14-5 8 8 0 0 1 14 5c0 12-14 20-14 20Z"/>
+              <path d="M18 24h12"/>
+              <path d="M24 18v12"/>
+            </svg>
+          </div>
+          <div class="content">
+            <h2>大切なのは、決めつけではなく格差の是正</h2>
+            <p>
+              したがって、特定の人種を生得的に劣っているとみなす見方は、科学的にも歴史的にも支持されておらず、社会構造や過去の不平等を無視した単純化に過ぎません。
+            </p>
+            <p>
+              重要なのは、人々の能力を決めつけることではなく、機会や環境の格差をいかに是正するかという視点です。
+            </p>
+          </div>
+        </section>
+
+        <aside class="closing">
+          <h2>偏見ではなく、背景と構造を見る</h2>
+          <p>
+            人の可能性を人種で測るのではなく、教育、生活環境、社会制度の不平等をなくすことが、公正な社会への出発点です。
+          </p>
+        </aside>
+      </article>
+    </main>
+
+    <footer>
+      <div class="footer-logo">
+        <img src="jcc-logo.png" alt="JCC Japan Creative Community">
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
