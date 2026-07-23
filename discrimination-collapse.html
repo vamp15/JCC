@@ -378,6 +378,75 @@
         padding: 11px 16px;
       }
     }
+
+    .site-footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(18px, 3vw, 26px);
+      text-align: center;
+    }
+
+    .x-follow {
+      width: min(100%, 680px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: clamp(16px, 3vw, 22px);
+      border: 2px solid var(--blue);
+      border-left: 8px solid var(--red);
+      border-radius: 8px;
+      background: linear-gradient(90deg, var(--white, var(--paper, #ffffff)), var(--paper, #f7f9fc));
+      box-shadow: 8px 8px 0 rgba(201, 35, 53, 0.16);
+    }
+
+    .x-follow-text {
+      margin: 0;
+      color: var(--blue);
+      font-size: clamp(1rem, 2.1vw, 1.24rem);
+      font-weight: 900;
+      line-height: 1.5;
+    }
+
+    .x-follow-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 22px;
+      color: var(--white, #ffffff);
+      background: var(--blue);
+      border: 3px solid var(--blue);
+      box-shadow: 5px 5px 0 var(--red);
+      font-size: 0.98rem;
+      font-weight: 900;
+      line-height: 1.2;
+      text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .x-follow-button:hover,
+    .x-follow-button:focus-visible {
+      color: var(--white, #ffffff);
+      background: var(--red);
+      border-color: var(--red);
+      box-shadow: 5px 5px 0 var(--blue);
+      outline: none;
+      transform: translate(2px, 2px);
+    }
+
+    @media (max-width: 640px) {
+      .x-follow {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .x-follow-button {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -504,9 +573,12 @@
       </section>
     </article>
   </main>
-
-  <footer>
+  <footer class="site-footer">
     <img src="assets/jcc-logo.png" alt="JCC Japan Creative Community ロゴ">
+    <div class="x-follow" aria-label="JCCのXアカウント">
+      <p class="x-follow-text">Xのフォローをよろしくお願いします！</p>
+      <a class="x-follow-button" href="https://x.com/JCC_Creative" target="_blank" rel="noopener noreferrer">Xをフォローする</a>
+    </div>
   </footer>
 
   <a href="index.html" style="position:fixed;bottom:28px;right:28px;display:inline-flex;align-items:center;gap:10px;padding:13px 22px;background:#003049;color:#f8f9fa;font-family:system-ui,sans-serif;font-size:0.97rem;font-weight:800;text-decoration:none;border:3px solid #003049;box-shadow:5px 5px 0 #c1121f;z-index:9999;transition:transform .15s ease,box-shadow .15s ease,background .15s ease;" onmouseover="this.style.background='#c1121f';this.style.boxShadow='5px 5px 0 #003049'" onmouseout="this.style.background='#003049';this.style.boxShadow='5px 5px 0 #c1121f'">

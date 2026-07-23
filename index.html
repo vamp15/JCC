@@ -419,6 +419,27 @@
         grid-template-columns: 1fr;
       }
     }
+
+    .home-footer {
+      width: min(100%, 760px);
+      display: grid;
+      justify-items: start;
+      gap: 14px;
+    }
+
+    .home-footer .x-follow-text {
+      margin: 0;
+      color: var(--blue);
+      font-size: clamp(1.08rem, 2.4vw, 1.45rem);
+      font-weight: 900;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 680px) {
+      .home-footer {
+        justify-items: stretch;
+      }
+    }
   </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18184144914">
@@ -555,10 +576,12 @@
           </a>
         </div>
       </section>
-
-      <a class="social" href="https://x.com/JCC_Creative" target="_blank" rel="noopener noreferrer">
-        私達のXのフォローをよろしくお願いします。
-      </a>
+      <footer class="site-footer home-footer" aria-label="Xへの誘導">
+        <p class="x-follow-text">Xのフォローをよろしくお願いします！</p>
+        <a class="social" href="https://x.com/JCC_Creative" target="_blank" rel="noopener noreferrer">
+          Xをフォローする
+        </a>
+      </footer>
     </div>
   </main>
 </body>
